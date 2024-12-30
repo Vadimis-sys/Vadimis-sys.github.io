@@ -1,1 +1,0 @@
-# Vadimis-sys.github.io
