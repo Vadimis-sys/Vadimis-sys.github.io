@@ -16,11 +16,6 @@ body {
 #grafic {
 	text-align:center;
 }
-	
-#video_vadim {
-	width: 15%;
-	height: auto; /* сохраняет пропорции */
-}
 
 #all_gallery {
 	border: 3px solid black;
@@ -40,9 +35,13 @@ body {
 }
 	
 #image_chockoboy{
-	  border-radius: 20px; /* радиус скругления углов */
+  border-radius: 20px;
+	width: 250px;
+	height: auto;
 }
 
 #video_vadim {
+	width: 250px;
+	height: auto;
 	border-radius: 20px;
 }
