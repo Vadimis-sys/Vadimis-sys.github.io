@@ -1,0 +1,48 @@
+body {
+  background-color: #b375fa;
+  font-family: Arial, sans-serif;
+}
+
+#image_porozhnyak {
+  display: block;
+  margin-top: 5px;
+	margin-bottom: 25px;
+	margin-right: 75%;
+	margin-left: 25%;
+  width: 45%;
+  height: auto;
+}
+				
+#grafic {
+	text-align:center;
+}
+	
+#video_vadim {
+	width: 15%;
+	height: auto; /* сохраняет пропорции */
+}
+
+#all_gallery {
+	border: 3px solid black;
+	border-radius: 20px;
+	font-family: Arial Black;
+	text-align: center;
+	font-size: 24px; 
+  background-color: #ffe400;
+}
+
+#div_gallery {
+	padding-left: 30px;
+	padding-bottom: 30px;
+	display: flex; /* Включает режим флексбокса */
+  flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
+	gap: 50px;
+}
+	
+#image_chockoboy{
+	  border-radius: 20px; /* радиус скругления углов */
+}
+
+#video_vadim {
+	border-radius: 20px;
+}
