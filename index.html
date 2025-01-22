@@ -3,8 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
+        body {
+            background-color: #b375fa;
+            font-family: Arial, sans-serif;
+        }
+
+        #image_porozhnyak {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            margin-right: 75%;
+            margin-left: 25%;
+            width: 45%;
+            height: auto;
+        }
+
+        #grafic {
+            text-align: center;
+        }
+
+        #all_gallery {
+            border: 3px solid black;
+            border-radius: 20px;
+            font-family: Arial Black;
+            text-align: center;
+            font-size: 24px; 
+            background-color: #ffe400;
+        }
+
+        #div_gallery {
+            padding-left: 30px;
+            padding-bottom: 30px;
+            display: flex; /* Включает режим флексбокса */
+            flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
+            gap: 40px;
+        }
+
+        #image_chockoboy {
+            border-radius: 20px;
+            width: 256px;
+            height: auto;
+        }
+
+        #video_vadim {
+            width: 256px;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        #image_kot {
+            border-radius: 20px;
+            width: 256px;
+            height: auto;
+        }
+
+        #image_anonim {
+            border-radius: 20px;
+            width: 256px;
+            height: auto;
+        }
+				
+				#image_beer {
+            border-radius: 20px;
+            width: 256px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -12,15 +76,16 @@
         <img src="imgs/porozhnyak-NY.svg" id="image_porozhnyak" alt="Обложка" />
     </header>
     <main>
-			<div id='all_gallery'> 
-				<p> ГАЛЕРЕЯ </p>
-			<div id='div_gallery'>
-				<video src='videos/vadim.mp4' controls id='video_vadim' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
-				<img src="imgs/chockoboy.jpg" id="image_chockoboy" alt="Вадимка чокобой" />
-				<img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
-				<img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
-			</div>
-			</div>
+        <div id='all_gallery'> 
+            <p> ГАЛЕРЕЯ </p>
+            <div id='div_gallery'>
+                <video src='videos/vadim.mp4' controls id='video_vadim' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
+                <img src="imgs/chockoboy.jpg" id="image_chockoboy" alt="Вадимка чокобой" />
+                <img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
+                <img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
+                <img src="imgs/beer.jpg" id="image_beer" alt="Пивасыч"/>
+            </div>
+        </div>
     </main>
 </body>
 </html>
