@@ -31,7 +31,7 @@ body {
 	padding-bottom: 30px;
 	display: flex; /* Включает режим флексбокса */
   flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
-	gap: 50px;
+	gap: 40px;
 }
 	
 #image_chockoboy{
@@ -44,4 +44,16 @@ body {
 	width: 250px;
 	height: auto;
 	border-radius: 20px;
+}
+
+#image_kot{
+  border-radius: 20px;
+	width: 250px;
+	height: auto;
+}
+
+#image_anonim{
+  border-radius: 20px;
+	width: 250px;
+	height: auto;
 }
