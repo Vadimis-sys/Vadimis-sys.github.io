@@ -7,20 +7,15 @@
         body {
             background-color: #b375fa;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         #image_porozhnyak {
             display: block;
-            margin-top: 5px;
-            margin-bottom: 25px;
-            margin-right: 75%;
-            margin-left: 25%;
-            width: 45%;
+            margin: 5px auto 25px auto;
+            width: 60%; /* Адаптивная ширина */
             height: auto;
-        }
-
-        #grafic {
-            text-align: center;
         }
 
         #all_gallery {
@@ -28,46 +23,39 @@
             border-radius: 20px;
             font-family: Arial Black;
             text-align: center;
-            font-size: 24px; 
+            font-size: 20px; /* Уменьшен шрифт для мобильных устройств */
             background-color: #ffe400;
+            margin: 10px; /* Отступы вокруг */
+            padding: 10px;
         }
 
         #div_gallery {
-            padding-left: 30px;
-            padding-bottom: 30px;
-            display: flex; /* Включает режим флексбокса */
-            flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
-            gap: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Уменьшенный разрыв */
+            justify-content: center; /* Центровка элементов */
         }
 
-        #image_chockoboy {
+        #div_gallery > * {
             border-radius: 20px;
-            width: 256px;
-            height: auto;
-        }
-
-        #video_vadim {
-            width: 256px;
-            height: auto;
-            border-radius: 20px;
-        }
-
-        #image_kot {
-            border-radius: 20px;
-            width: 256px;
+            width: 45%; /* Относительная ширина */
+            max-width: 250px; /* Ограничение максимального размера */
             height: auto;
         }
 
-        #image_anonim {
-            border-radius: 20px;
-            width: 256px;
-            height: auto;
+        video {
+            width: 100%; /* Видео адаптируется */
         }
-				
-				#image_beer {
-            border-radius: 20px;
-            width: 256px;
-            height: auto;
+
+        /* Медиа-запросы для узких экранов */
+        @media (max-width: 600px) {
+            #div_gallery > * {
+                width: 90%; /* Элементы занимают почти всю ширину */
+            }
+
+            #all_gallery {
+                font-size: 18px; /* Ещё меньше шрифт для маленьких экранов */
+            }
         }
     </style>
 </head>
@@ -76,14 +64,14 @@
         <img src="imgs/porozhnyak-NY.svg" id="image_porozhnyak" alt="Обложка" />
     </header>
     <main>
-        <div id='all_gallery'> 
-            <p> ГАЛЕРЕЯ </p>
-            <div id='div_gallery'>
-                <video src='videos/vadim.mp4' controls id='video_vadim' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
+        <div id="all_gallery"> 
+            <p>ГАЛЕРЕЯ</p>
+            <div id="div_gallery">
+                <video src="videos/vadim.mp4" controls id="video_vadim" alt="Видео с вадимом">Ваш браузер не поддерживает .mp4 видео</video>
                 <img src="imgs/chockoboy.jpg" id="image_chockoboy" alt="Вадимка чокобой" />
                 <img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
                 <img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
-                <img src="imgs/beer.jpg" id="image_beer" alt="Пивасыч"/>
+                <img src="imgs/beer.jpg" id="image_beer" alt="Пивасыч" />
             </div>
         </div>
     </main>
