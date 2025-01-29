@@ -6,7 +6,6 @@
     <style>
         body {
             background-color: #b375fa;
-            font-family: Arial, sans-serif;
         }
 
         #grafic {
@@ -33,7 +32,7 @@
 
 				#image_porozhnyak {
             display: block;
-            margin-top: 5px;
+            margin-top: 10px;
             margin-bottom: 25px;
             margin-right: 75%;
             margin-left: 25%;
@@ -70,6 +69,12 @@
             width: 256px;
             height: auto;
         }
+				
+				footer {
+				font-family: Arial Black;
+				font-weight: bold;
+				text-align: right;
+				}
     </style>
 </head>
 <body>
@@ -83,7 +88,7 @@
         <div id='all_gallery'> 
             <p> ГАЛЕРЕЯ </p>
             <div id='div_gallery'>
-                <video src='videos/vadim.mp4' controls id='video_vadim' poster='imgs/chockoboyorig.jpeg' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
+                <video src='videos/vadim.mp4' controls id='video_vadim' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
                 <img src="imgs/chockoboy.jpg" id="image_chockoboy" alt="Вадимка чокобой" />
                 <img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
                 <img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
@@ -91,5 +96,8 @@
             </div>
         </div>
     </main>
+		<footer>
+		created by @bladasone
+		</footer>
 </body>
 </html>
