@@ -6,6 +6,9 @@
     <style>
         body {
             background-color: #b375fa;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
 
         #grafic {
@@ -20,46 +23,69 @@
             font-size: 24px;
             font-weight: bold;
             background-color: #ffe400;
+            margin: 20px;
+            padding: 10px;
         }
 
         #div_gallery {
-            padding-left: 30px;
-            padding-bottom: 30px;
-            display: flex; /* Включает режим флексбокса */
-            flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
-            gap: 40px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
 
         #image_porozhnyak {
             display: block;
-            margin-top: 10px;
-            margin-bottom: 25px;
-            margin-left: 12%;
-            width: 75%;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
             height: auto;
         }
 
         #image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer {
             border-radius: 20px;
-            width: 256px;
+            width: 100%;
+            max-width: 256px;
             height: auto;
         }
 
         footer {
             font-family: Arial Black;
             font-weight: bold;
-            text-align: right;
+            text-align: center;
+            padding: 20px;
+            background-color: #ffe400;
+            margin-top: 20px;
         }
 
         #randbut {
-            margin-top: 1%;
-            margin-left: 32%;
-            width: 35%;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 300px;
             height: 50px;
             border-radius: 10px;
-						color: black;
-						font-family: Arial Black;
-						font-weight: bold;
+            color: black;
+            font-family: Arial Black;
+            font-weight: bold;
+            display: block;
+            background-color: #ffe400;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            #all_gallery {
+                font-size: 18px;
+            }
+
+            #randbut {
+                font-size: 16px;
+            }
+
+            #div_gallery {
+                gap: 10px;
+            }
         }
     </style>
 </head>
