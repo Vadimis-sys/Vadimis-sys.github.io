@@ -43,13 +43,14 @@
             height: auto;
         }
 
-        #image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok{
-            border-radius: 20px;
+				#image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok {
+						border-radius: 20px;
 						margin-bottom: 25px;
-            width: 100%;
-            max-width: 256px;
-            height: auto;
-        }
+						width: 100%;
+						max-width: 256px;
+						height: 512px; /* Фиксированная высота */
+						object-fit: cover; /* Чтобы изображение заполняло область, сохраняя пропорции */
+				}
 
         footer {
             font-family: Arial Black;
