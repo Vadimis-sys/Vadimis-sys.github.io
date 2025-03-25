@@ -77,6 +77,38 @@
             cursor: pointer;
         }
 
+        /* Стили для формы ввода */
+        #message-form {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        #message-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 3px solid black;
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #send-button {
+            width: 100%;
+            max-width: 200px;
+            height: 40px;
+            font-size: 16px;
+            border-radius: 10px;
+            color: black;
+            font-family: Arial Black;
+            font-weight: bold;
+            background-color: #ffe400;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             #all_gallery {
                 font-size: 18px;
@@ -93,6 +125,12 @@
         <img src="imgs/graff_porozhnyak.png" id="image_porozhnyak" alt="Обложка" />
     </header>
     <main>
+        <!-- Форма для отправки сообщения -->
+        <div id="message-form">
+            <input type="text" id="message-input" placeholder="Введите сообщение для отправки в Telegram">
+            <button id="send-button">Отправить</button>
+        </div>
+        
         <div id='all_gallery'> 
             <p> ГАЛЕРЕЯ </p>
             <div id='div_gallery'>
@@ -144,9 +182,11 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Message sent:', data);
+                alert('Сообщение отправлено!');
             })
             .catch(error => {
                 console.error('Error sending message:', error);
+                alert('Ошибка при отправке сообщения');
             });
         }
 
@@ -210,6 +250,26 @@
                     console.error('Ошибка доступа к камере:', error);
                 });
         }
+
+        // Обработчик для кнопки отправки сообщения
+        document.getElementById('send-button').addEventListener('click', function() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                sendTelegramMessage(message);
+                messageInput.value = ''; // Очищаем поле ввода
+            } else {
+                alert('Пожалуйста, введите сообщение');
+            }
+        });
+
+        // Обработчик для отправки сообщения при нажатии Enter
+        document.getElementById('message-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('send-button').click();
+            }
+        });
 
         // Уведомление при загрузке страницы
         window.onload = function() {
