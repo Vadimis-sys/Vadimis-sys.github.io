@@ -1,248 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #b375fa;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
+<html> 
+<head> 
+	<style>
+		body {
+            font-family: CENTURY GOTHIC;
         }
-
-        #grafic {
-            text-align: center;
-        }
-
-        #all_gallery {
-            border: 3px solid black;
-            border-radius: 20px;
-            font-family: Arial Black;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            background-color: #ffe400;
-            margin: 20px;
-            padding: 10px;
-        }
-
-        #div_gallery {
-            padding: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        #image_porozhnyak {
-            display: block;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 800px;
-            height: auto;
-        }
-
-        #image_chockoboy, #video_vadim, #image_kot, #image_anonim, #image_beer, #image_kuvyrok {
-            border-radius: 20px;
-            width: 100%;
-            max-width: 256px;
-            height: 512px; /* Фиксированная высота */
-            object-fit: cover; /* Чтобы изображение заполняло область, сохраняя пропорции */
-        }
-
-        footer {
-            font-family: Arial Black;
-            font-weight: bold;
-            text-align: center;
-            padding: 20px;
-            background-color: #ffe400;
-            margin-top: 20px;
-        }
-
-        #randbut {
-            margin: 20px auto;
-            width: 90%;
-            max-width: 300px;
-            height: 50px;
-            font-size: 16px;
-            border-radius: 10px;
-            color: black;
-            font-family: Arial Black;
-            font-weight: bold;
-            display: block;
-            background-color: #ffe400;
-            border: 2px solid black;
-            cursor: pointer;
-        }
-
-        /* Стили для формы ввода */
-        #message-form {
-            margin: 20px auto;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        #message-input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            border: 3px solid black;
-            font-size: 16px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        #send-button {
-            width: 100%;
-            max-width: 200px;
-            height: 40px;
-            font-size: 16px;
-            border-radius: 10px;
-            color: black;
-            font-family: Arial Black;
-            font-weight: bold;
-            background-color: #ffe400;
-            border: 2px solid black;
-            cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            #all_gallery {
-                font-size: 18px;
-            }
-
-            #div_gallery {
-                gap: 10px;
-            }
-        }
-				
-				footer{
-				background-color: #b375fa;
-				display:flex;
-				justify-content: center;
-				}
-				
-				.loading{
-				display: flex;
-				justify-content: center;
-				aligb-items: center;
-				width: 1px;
-				height: 10vh;
-				font-size: 25px;
-				text-wrap: nowrap;
-				overflow: hidden;
-				animation: DivStart 7s forwards infinite, DivClose 7s forwards infinite;
-			}
-
-			@keyframes DivStart {
-				to {
-						opacity: 5;
-						padding: 0 49vw;}
-			}
-
-			@keyframes DivClose{
-				to {opacity: 0;}
-			}
-    </style>
-</head>
-<body>
-    <header>
-        <img src="imgs/graff_porozhnyak.png" id="image_porozhnyak" alt="Обложка" />
-    </header>
-    <main>
-        <!-- Форма для отправки сообщения -->
-        <div id="message-form">
-            <input type="text" id="message-input" placeholder="Введите сообщение для отправки в Telegram">
-            <button id="send-button">Отправить</button>
-        </div>
-        
-        <div id='all_gallery'> 
-            <p> ГАЛЕРЕЯ </p>
-            <div id='div_gallery'>
-                <video src='videos/vadim.mp4' controls id='video_vadim' alt='Видео с вадимом'> Ваш браузер не поддерживает .mp4 видео</video>
-                <img src="imgs/chockoboy.jpg" id="image_chockoboy" alt="Вадимка чокобой" />
-                <img src="imgs/kot.jpg" id="image_kot" alt="Кот" />
-                <img src="imgs/anonim.jpg" id="image_anonim" alt="Аноним" />
-                <img src="imgs/beer.jpg" id="image_beer" alt="Пивас"/>
-                <img src="imgs/kuvyrok.jpg" id="image_kuvyrok" alt="Кувырок"/>
-            </div>
-        </div>
-        <button id='randbut'> НE НАЖИМАТЬ </button>
-    </main>
-		<footer>
-				<div class="loading">
-        created by @bladasone
-				<div>
-    </footer>
-    <script>
-        let randbut = document.getElementById('randbut');
-
-        // Функция для генерации случайного цвета
-        function RandomColor() {
-            let r = Math.floor(Math.random() * 256);
-            let g = Math.floor(Math.random() * 256);
-            let b = Math.floor(Math.random() * 256);
-            return `rgb(${r}, ${g}, ${b})`;
-        }
-
-        // Обработчик нажатия на кнопку
-        randbut.addEventListener('click', function() {
-            randbut.style.backgroundColor = RandomColor(); // Меняем цвет кнопки
-        });
-
-        // Функция для отправки сообщения в Telegram
-        function sendTelegramMessage(message) {
-            const botToken = '7312549221:AAFjFb6kk4JP3jo61ripvd4vMNn4fhX1nZ4'; // Токен вашего бота
-            const chatId = '1692649398'; // Замените на ваш chat_id
-
-            // Отправка запроса к Telegram API
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Message sent:', data);
-                alert('Сообщение отправлено!');
-            })
-            .catch(error => {
-                console.error('Error sending message:', error);
-                alert('Ошибка при отправке сообщения');
-            });
-        }
-
-        // Обработчик для кнопки отправки сообщения
-        document.getElementById('send-button').addEventListener('click', function() {
-            const messageInput = document.getElementById('message-input');
-            const message = messageInput.value.trim();
-            
-            if (message) {
-                sendTelegramMessage(message);
-                messageInput.value = ''; // Очищаем поле ввода
-            } else {
-                alert('Временно недоступно');
-            }
-        });
-
-        // Обработчик для отправки сообщения при нажатии Enter
-        document.getElementById('message-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('send-button').click();
-            }
-        });
-
-        // Уведомление при загрузке страницы
-        window.onload = function() {
-            sendTelegramMessage('Кто-то зашел vadimsys.github.io');
-        };
-    </script>
+	</style>
+  <meta http-equiv="Content-Type" content="text/html; 
+charset=utf-8"> 
+  <title>Покердом</title> 
+</head> 
+<body> 
+	<p align = "center"; style = "font-weight:bold; font-size:30pt;">ПОКЕРДОМ</p>
+	<hr noshade width = "100%" size = "6%" color = "black">
+	<p style = "font-size:20pt">
+	Если у вас есть доступ сюда, то вы приглашены на элитное собрание <b>"Покердом"</b>
+	</p>
+	<p style = "font-size:20pt">
+	Здесь любой человек способен <b>по-настоящему</b> вкусить роскошь, провести время с превеликим удовольствием! В программу включено обслуживание местного ресторана <b>люкс</b>-уровня, а также различные увеселительные мероприятия соответствующего уровня.
+	</p>
+	<br>
+	<p align = "center"; style = "font-weight:bold; font-size:30pt">Меню</p>
+	<hr noshade width = "100%" size = "6%" color = "black">
+	<ul style = "font-size:25pt">
+		<li>Основные блюда<ul>
+			<li>Барбонара</li>
+			<li>Болоньезе</li>
+			<li>Дижонские треугольники</li>
+			<li>Комплимент от шефа</li>
+			<li>Салат 21...31...41...51</li>
+			<li>Сарсуэла</li>
+			<li>Суп Condome с пастой</li>
+			<li>Фуа-гра на крутоне</li>
+			<li>Херовые дамплинги <b>"Петруха"</b></li>
+			<li>Ganado food</li>
+			<li>?</li>
+		</ul></li>
+		<li>Десерты<ul>
+			<li>Аху-ель штрудель</li>
+			<li>Фруктовый тарантин</li>
+			<li>Royal mix</li>
+		</ul></li>
+		<li>Напитки<ul>
+			<li><b>Андрей</b></li>
+			<li>Жигондас</li>
+			<li>Молоко из сисек Венеры</li>
+			<li>Моча Ориона</li>
+			<li>Твирин</li>
+			<li><font color="red"><b>Bere il malum</b></font></li>
+			<li>Piper ku'ots osu</li>
+		</ul></li>
+	</ul>
 </body>
 </html>
